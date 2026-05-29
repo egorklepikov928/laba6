@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Царский Никита Сергеевич">
+    <meta name="keywords" content="HTML, CSS, JavaScript, Калькулятор">
+    <meta name="description" content="Лабораторная работа 5 - Web-калькулятор">
+    <link rel="stylesheet" href="style.css">
+    <title>Мой первый простой сайт - Калькулятор</title>
+    
+    <style>
+        /* Обновляем шрифты секции контента, если они не заданы в style.css */
+        #right {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Стильный контейнер калькулятора */
+        .modern-calc {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 16px;
+            max-width: 340px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eaeaea;
+            margin-top: 20px;
+        }
+
+        /* Оформление блоков с инпутами */
+        .calc-group {
+            margin-bottom: 18px;
+        }
+
+        .calc-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #555;
+        }
+
+        /* Поля ввода */
+        .calc-input {
+            width: 100%;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+            outline: none;
+            background-color: #f9f9f9;
+        }
+
+        .calc-input:focus {
+            border-color: #4a90e2;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.15);
+        }
+
+        /* Поле результата */
+        .calc-input[readonly] {
+            background-color: #f1f3f5;
+            border-color: #e2e8f0;
+            color: #101113;
+            font-weight: 700;
+        }
+
+        /* Сетка для основных кнопок (+ - * /) */
+        .calc-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* Общие стили кнопок */
+        .btn-calc {
+            padding: 14px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            background-color: #f1f3f5;
+            color: #212529;
+            transition: all 0.15s ease;
+        }
+
+        .btn-calc:hover {
+            background-color: #e2e8f0;
+            transform: translateY(-1px);
+        }
+
+        .btn-calc:active {
+            transform: translateY(1px);
+        }
+
+        /* Выделение математических операций */
+        .btn-op {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        .btn-op:hover {
+            background-color: #357abd;
+        }
+
+        /* Кнопка СЕ (Очистить) */
+        .btn-clear {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid #ffa3a3;
+            border-radius: 10px;
+            background-color: #fff5f5;
+            color: #e03131;
+            box-sizing: border-box;
+            transition: all 0.15s ease;
+        }
+
+        .btn-clear:hover {
+            background-color: #ffe3e3;
+            color: #c92a2a;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        // Функция сложения (+)
+        function summ() {
+            var a = parseFloat(document.form1.T1.value) || 0;
+            var b = parseFloat(document.form1.T2.value) || 0;
+            document.form1.T3.value = a + b;
+        }
+
+        // Функция вычитания (-)
+        function razn() {
+            var a = parseFloat(document.form1.T1.value) || 0;
+            var b = parseFloat(document.form1.T2.value) || 0;
+            document.form1.T3.value = a - b;
+        }
+
+        // Функция умножения (*)
+        function umnozh() {
+            var a = parseFloat(document.form1.T1.value) || 0;
+            var b = parseFloat(document.form1.T2.value) || 0;
+            document.form1.T3.value = a * b;
+        }
+
+        // Функция деления (/)
+        function chast() {
+            var a = parseFloat(document.form1.T1.value) || 0;
+            var b = parseFloat(document.form1.T2.value) || 0;
+            if (b !== 0) {
+                document.form1.T3.value = a / b;
+            } else {
+                document.form1.T3.value = "Деление на 0!";
+            }
+        }
+
+        // Функция СЕ (очистить всё)
+        function steret() {
+            document.form1.T1.value = 0;
+            document.form1.T2.value = 0;
+            document.form1.T3.value = 0;
+            document.form1.T1.focus();
+            document.form1.T1.select();
+        }
+    </script>
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <h1><a href="index.html">Мой первый сайт</a></h1>
+        </div>
+ 
+        <div id="content">
+            <div id="left">
+                <h2>Навигация</h2>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="news.html">Новости</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="secret.html">Секрет</a></li>
+                    <li><a href="calc.html">Калькулятор</a></li>
+                </ul>
+                <h2>Ссылки</h2>
+                <ul>
+                    <li><a href="https://yandex.ru" target="_blank">Яндекс</a></li>
+                    <li><a href="https://google.com" target="_blank">Google</a></li>
+                </ul>
+                <h2>Авторизация</h2>
+                <form action="index.html" method="post">
+                    Пользователь:
+                    <div align="right"><input name="login" type="text"></div>
+                    Пароль:
+                    <div align="right"><input name="pwd" type="password"></div>
+                    <div align="right"><input name="ok" type="submit" value="Войти"></div>
+                </form>
+            </div>
+ 
+            <div id="right">
+                <h2>Страница Web-калькулятор</h2>
+                <p>Данный раздел демонстрирует возможности обработки элементов экранной формы и выполнения математических вычислений на JavaScript.</p>
+                <hr>
+                
+                <h3>Инженерный калькулятор</h3>
+                
+                <form name="form1" class="modern-calc">
+                    <div class="calc-group">
+                        <label>Число 1:</label>
+                        <input type="text" name="T1" value="0" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Число 2:</label>
+                        <input type="text" name="T2" value="0" class="calc-input">
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label>Результат вычислений:</label>
+                        <input type="text" name="T3" value="0" readonly class="calc-input">
+                    </div>
+                    
+                    <div class="calc-grid">
+                        <input type="button" value="+" onclick="summ()" class="btn-calc btn-op">
+                        <input type="button" value="-" onclick="razn()" class="btn-calc btn-op">
+                        <input type="button" value="×" onclick="umnozh()" class="btn-calc btn-op">
+                        <input type="button" value="÷" onclick="chast()" class="btn-calc btn-op">
+                    </div>
+                    
+                    <div>
+                        <input type="button" value="Очистить всё (CE)" onclick="steret()" class="btn-clear">
+                    </div>
+                </form>
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+ 
+        <div id="footer">&copy; Царский Никита Сергеевич</div>
+    </div>
+</body>
+</html>
